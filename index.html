@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<title>Doctor Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<div id="chart"></div>
+<!--<div id="chart" style="top:200px"></div>-->
+<script> 
+
+    
+    
+    Highcharts.chart('chart', {
+
+    title: {
+        text: 'Activity Chart'
+    },
+
+   
+
+    yAxis: {
+        title: {
+            text: 'Heartrate'
+        }
+    },
+    xAxis: {
+        title: {
+            text: 'Time (minutes)'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            pointStart: 0
+        }
+    },
+
+    series: [{
+        name: 'Monday',
+        data: [80, 85, 90, 88, 100, 95, 101, 111]
+    }, {
+        name: 'Tuesday',
+        data: [75, 70, 76, 81, 84, 93, 90, 104]
+    }, {
+        name: 'Wednesday',
+        data: [74, 77, 85, 88, 90, 108, 114, 106]
+    }]
+
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+var spreadsheetId = "1V6op68YeZYJAkaIvJii0roM-Df-QEgENabsgwa_SldU",
+  url = "https://spreadsheets.google.com/feeds/list/" +
+  spreadsheetId +
+  "/od6/public/basic?alt=json";
+
+$.get({
+  url: url,
+  success: function(response) {
+    var data = response.feed.entry,
+      len = data.length,
+      i = 0,
+      parsedData = [];
+
+    for (i = 0; i < len; i++) {
+      parsedData.push({
+        label: data[i].title.$t,
+        value: data[i].content.$t.replace('income: ', '')
+      });
+    }
+
+    new FusionCharts({
+      type: 'bar2d',
+      renderAt: 'chart-container',
+      width: '50%',
+      height: '300',
+      dataFormat: 'json',
+      dataSource: {
+        "chart": {
+          "caption": "Min",
+          "yAxisName": "Annual Income (in milion USD)",
+          "numberPrefix": "$"
+        },
+        "data": parsedData
+      }
+    }).render();
+  }
+});
+</script>
+<script src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+    #panel1 {
+        border-radius: 25px;
+        background-color: #ffffb3;
+    }
+     #panel2 {
+        border-radius: 25px;
+          background-color: #ffffb3; 
+    }
+     #panel3 {
+        border-radius: 25px;
+          background-color: #ffffb3;
+         left:60%
+    }
+      #panel4 {
+        border-radius: 25px;
+           background-color: #ffffb3;
+    }
+     #panel5 {
+        border-radius: 25px;
+          background-color: #ffffb3;
+    }
+    #profilePic {
+        position: relative;
+        max-width: 80%;
+        left: 10%;
+    }
+    body {
+        background-image: url("/img/workoutPic1.jpg");
+    }   
+</style>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1200px;">
+<div class="w3-content w3-margin-left" style="max-height:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+<!--  <img src="/img/workoutPic1.jpg" style="width:100% height:100% top:75%" alt="Avatar">-->
+    <!-- Left Column -->
+    <div class="w3-half">
+    
+      <div id="panel1" class=" w3-text-grey w3-card-4">
+        <div  class="w3-display-container">
+          <img id="profilePic"src="/img/doctor.jpeg" alt="Avatar">
+           
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>Dr. Jane Doe</h2>
+          </div>
+        </div>
+        <div id="panel2" class="w3-container">
+<!--          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Designer</p>-->
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>200 Circle Road, Stony Brook University</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@stonybrook.edu</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Availability</b></p>
+          <p>Monday</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+          </div>
+          <p>Tuesday</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
+              <div class="w3-center w3-text-white">80%</div>
+            </div>
+          </div>
+          <p>Wednesday</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:75%">75%</div>
+          </div>
+          <p>Thursday</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+          </div>
+          <br>
+
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+          <p>English</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>Spanish</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+          </div>
+          <p>German</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-half">
+    
+      <div id="panel3" class="w3-container w3-card-2 w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>About</h2>
+        <div class="w3-container">
+<!--
+          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
+-->
+          <p></p>
+          <hr>
+        </div>
+        <div class="w3-container">
+<!--
+          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
+          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+-->
+        </div>
+        <div class="w3-container">
+<!--
+          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
+-->
+        </div>
+      </div>
+
+      <div id="panel4" class="w3-container w3-card-2 w3-padding-large">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Stony Brook Medicine</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013-2017</h6>
+<!--          <p>Web Development! All I need to know in one place</p>-->
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>University of Connecticut</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2008 - 2012</h6>
+<!--          <p>Master Degree</p>-->
+          <hr>
+        </div>
+<!--
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>School of Coding</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+          <p>Bachelor Degree</p><br>
+        </div>
+-->
+      </div>
+        
+        
+        
+        <div id="panel5" class="w3-container w3-card-2 w3-padding-large">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Data</h2>
+        <div class="w3-container">
+           
+<!--
+            <div id="chart-container">
+                <p>The chart will render here!</p>
+            </div>
+-->
+        </div>
+     
+       
+
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
